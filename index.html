@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Ricardo Dovonou, développeur web en formation au Bénin.">
+    <title>Ricardo Dovonou - Développeur Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo"><i class="fas fa-code"></i> Ricardo</a>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Accueil</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#projects">Projets</a></li>
+                    <li><a href="#experience">Parcours</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="greeting"><i class="fas fa-hand-wave"></i> Bonjour, je suis</p>
+                    <h1 class="hero-title">Ricardo Dovonou</h1>
+                    <p class="hero-subtitle">Développeur web en formation, passionné par la création d’interfaces et d’applications utiles, modernes et fonctionnelles.</p>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-outline">Me contacter</a>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://github.com/DocariDR" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/ricardo-dovonou" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="hero-image"><div class="profile-circle"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-content">
+                <div class="about-img"><img src="images/image3.png" alt="Illustration du développement web"></div>
+                <div class="about-text">
+                    <h3 class="about-title">Développeur web en formation</h3>
+                    <p class="about-description">Développeur web en début de parcours professionnel, j’ai complété une formation pratique en <strong>Développement Web</strong> et en <strong>Gestion de Projets</strong> chez FHC Groupe Sarl. Je développe principalement des interfaces et applications web avec HTML5, CSS3, JavaScript, PHP et MySQL, tout en renforçant mes compétences à travers des projets pratiques et des parcours complémentaires. J’accorde une attention particulière à la qualité du code, à la structure des interfaces, à l’accessibilité et à la résolution de problèmes. Ma formation en gestion de projets me permet d’aborder les réalisations numériques avec une approche structurée, de la définition du besoin à la planification et au suivi du projet.</p>
+                    <div class="info-item"><i class="fas fa-user"></i><div><h4>Prénom & Nom</h4><p>Ricardo Dovonou</p></div></div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><h4>Localisation</h4><p>Bénin</p></div></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p><a href="mailto:ricardovonoupro@gmail.com">ricardovonoupro@gmail.com</a></p></div></div>
+                    <div class="info-item"><i class="fas fa-phone"></i><div><h4>Téléphone</h4><p><a href="tel:+2290160393906">+229 01 60 39 39 06</a></p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Compétences</h2>
+            <div class="skills-container">
+                <div class="skill-category"><h3><i class="fas fa-laptop-code"></i> Développement web</h3><ul><li>HTML5 sémantique</li><li>CSS3 & Flexbox</li><li>Responsive Design</li><li>JavaScript vanilla & DOM</li><li>CSS Grid</li><li>Accessibilité web</li></ul></div>
+                <div class="skill-category"><h3><i class="fas fa-server"></i> Back-End & données</h3><ul><li>PHP</li><li>MySQL</li><li>PDO</li><li>Requêtes préparées</li><li>Authentification et sessions</li></ul></div>
+                <div class="skill-category"><h3><i class="fas fa-screwdriver-wrench"></i> Outils</h3><ul><li>Git & GitHub</li><li>VS Code</li><li>GitHub Pages</li><li>Microsoft Office</li></ul></div>
+                <div class="skill-category"><h3><i class="fas fa-diagram-project"></i> Gestion de projets</h3><ul><li>Cadrage et analyse du besoin</li><li>WBS & planification</li><li>Ressources et budget</li><li>Gestion des risques</li><li>KPI & objectifs SMART</li><li>SWOT / PESTEL</li><li>Microsoft Project & Excel avancé</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Mes projets</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="fullstack">PHP / MySQL</button>
+                <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                <button class="filter-btn" data-filter="frontend">HTML / CSS</button>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" data-category="fullstack"><div class="project-img"><img src="images/image3.png" alt="Gestion de produits et commandes"></div><div class="project-content"><h3 class="project-title">Gestion de produits et commandes</h3><span class="project-category ecommerce">PHP / MySQL</span><p class="project-description">Application web avec authentification, contrôle d’accès par rôles, gestion des produits, du stock et des commandes.</p><div class="project-tech"><span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">PDO</span><span class="tech-tag">JavaScript</span></div><a href="https://github.com/DocariDR/gestion_produits_commandes-fhc" target="_blank" rel="noopener" class="btn btn-outline">Voir sur GitHub</a></div></div>
+                <div class="project-card" data-category="javascript"><div class="project-img"><img src="images/image3.png" alt="Task List"></div><div class="project-content"><h3 class="project-title">Task List</h3><span class="project-category frontend">JavaScript</span><p class="project-description">Application de gestion de tâches avec ajout et suppression dynamique, validation, prévention des doublons, délégation d’événements et animations CSS.</p><div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">DOM</span><span class="tech-tag">HTML/CSS</span></div><a href="https://docaridr.github.io/task-list-fhc-groupe/" target="_blank" rel="noopener" class="btn btn-outline">Voir la démo</a><a href="https://github.com/DocariDR/task-list-fhc-groupe" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a></div></div>
+                <div class="project-card" data-category="frontend"><div class="project-img"><img src="images/image3.png" alt="Company Website"></div><div class="project-content"><h3 class="project-title">Company Website</h3><span class="project-category wordpress">HTML / CSS</span><p class="project-description">Intégration autonome d’un site vitrine multipage à partir d’un brief et de maquettes, avec navigation responsive, menu hamburger et formulaire de contact.</p><div class="project-tech"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">Flexbox</span></div><a href="https://docaridr.github.io/company-fhc-group/" target="_blank" rel="noopener" class="btn btn-outline">Voir la démo</a><a href="https://github.com/DocariDR/company-fhc-group" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a></div></div>
+                <div class="project-card" data-category="frontend"><div class="project-img"><img src="images/image3.png" alt="CV Web"></div><div class="project-content"><h3 class="project-title">CV Web</h3><span class="project-category wordpress">HTML / CSS</span><p class="project-description">Version web interactive de mon CV, développée dans le cadre de ma formation chez FHC Groupe Sarl, avec structure sémantique, design responsive et animations CSS.</p><div class="project-tech"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">Flexbox</span></div><a href="https://docaridr.github.io/cv-web-ricardo/" target="_blank" rel="noopener" class="btn btn-outline">Voir la démo</a><a href="https://github.com/DocariDR/cv-web-ricardo" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a></div></div>
+                <div class="project-card" data-category="fullstack"><div class="project-img"><img src="images/image3.png" alt="Projet de fin de formation"></div><div class="project-content"><h3 class="project-title">Projet de fin de formation</h3><span class="project-category ecommerce">En cours</span><p class="project-description">Projet web complexe présenté à la fin de ma formation pratique chez FHC Groupe Sarl. Amélioration en cours avant les tests auprès d’utilisateurs cibles.</p><div class="project-tech"><span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">API</span><span class="tech-tag">AJAX</span></div><span class="btn btn-outline">Bientôt disponible</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container"><h2 class="section-title text-center">Formations & certifications</h2><div class="timeline">
+            <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Juillet - Août 2026</div><h3 class="timeline-title">Développement Web</h3><div class="timeline-company">FHC Groupe Sarl</div><p class="timeline-description">Formation pratique terminée en développement web : HTML5, CSS3, JavaScript, PHP, MySQL et réalisation de projets concrets.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Juillet - Août 2026</div><h3 class="timeline-title">Gestion de Projets</h3><div class="timeline-company">FHC Groupe Sarl</div><p class="timeline-description">Formation pratique terminée couvrant le cadrage, le WBS, la planification, les ressources, le budget et les risques.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">En cours</div><h3 class="timeline-title">Responsive Web Design</h3><div class="timeline-company">freeCodeCamp</div><p class="timeline-description">Parcours consacré à HTML5, CSS3, Flexbox, au responsive design, à l’accessibilité et à des projets pratiques.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Certifié</div><h3 class="timeline-title">7 certificats LinkedIn Learning</h3><div class="timeline-company">LinkedIn Learning</div><p class="timeline-description">Certificats obtenus en programmation, HTML, CSS, JavaScript, jQuery, Git et GitHub.</p></div></div>
+            <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Formation académique</div><h3 class="timeline-title">DT - Installation et Maintenance Informatique</h3><div class="timeline-company">Lycée Technique Coulibaly, Bénin</div><p class="timeline-description">Diplôme de technicien en Installation et Maintenance Informatique.</p></div></div>
+        </div></div>
+    </section>
+
+    <section id="qualities" class="section"><div class="container"><h2 class="section-title text-center">Qualités, langues & intérêts</h2><div class="skills-container"><div class="skill-category"><h3><i class="fas fa-user-check"></i> Qualités professionnelles</h3><ul><li>Esprit d’analyse</li><li>Rigueur et organisation</li><li>Curiosité et autonomie</li><li>Persévérance</li><li>Capacité d’apprentissage</li><li>Travail en équipe</li></ul></div><div class="skill-category"><h3><i class="fas fa-language"></i> Langues</h3><ul><li>Français : courant</li><li>Anglais technique</li><li>Lecture de documentation informatique</li></ul></div><div class="skill-category"><h3><i class="fas fa-lightbulb"></i> Centres d’intérêt</h3><ul><li>Développement web</li><li>Gestion de projets</li><li>Veille technologique</li><li>Apprentissage continu</li><li>Open Source</li><li>Création de contenu technique</li></ul></div></div></section>
+
+    <section id="contact" class="section"><div class="container"><h2 class="section-title text-center">Contactez-moi</h2><div class="contact-container"><div class="contact-info">
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div class="contact-details"><h4>Adresse</h4><p>Bénin</p></div></div>
+        <div class="contact-item"><i class="fas fa-phone"></i><div class="contact-details"><h4>Téléphone</h4><p><a href="tel:+2290160393906">+229 01 60 39 39 06</a></p></div></div>
+        <div class="contact-item"><i class="fas fa-envelope"></i><div class="contact-details"><h4>Email</h4><p><a href="mailto:ricardovonoupro@gmail.com">ricardovonoupro@gmail.com</a></p></div></div>
+        <div class="contact-item"><i class="fab fa-linkedin"></i><div class="contact-details"><h4>LinkedIn</h4><p><a href="https://linkedin.com/in/ricardo-dovonou" target="_blank" rel="noopener">ricardo-dovonou</a></p></div></div>
+        <div class="contact-item"><i class="fab fa-github"></i><div class="contact-details"><h4>GitHub</h4><p><a href="https://github.com/DocariDR" target="_blank" rel="noopener">DocariDR</a></p></div></div>
+    </div><div class="contact-form"><form id="contactForm"><div class="form-group"><label for="name">Nom complet</label><input type="text" id="name" class="form-control" required></div><div class="form-group"><label for="email">Email</label><input type="email" id="email" class="form-control" required></div><div class="form-group"><label for="subject">Sujet</label><input type="text" id="subject" class="form-control" required></div><div class="form-group"><label for="message">Message</label><textarea id="message" class="form-control" required></textarea></div><button type="submit" class="btn">Envoyer le message</button></form></div></div></div></section>
+
+    <footer><div class="container"><div class="footer-content"><div class="footer-column"><h3>Ricardo Dovonou</h3><p>Développeur web en formation, à la recherche d’une opportunité de stage ou de premier poste.</p><div class="footer-social"><a href="https://github.com/DocariDR" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a><a href="https://linkedin.com/in/ricardo-dovonou" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></div></div><div class="footer-column"><h3>Liens rapides</h3><ul class="footer-links"><li><a href="#home">Accueil</a></li><li><a href="#about">À propos</a></li><li><a href="#skills">Compétences</a></li><li><a href="#projects">Projets</a></li><li><a href="#experience">Parcours</a></li><li><a href="#qualities">Qualités & intérêts</a></li></ul></div><div class="footer-column"><h3>Compétences</h3><ul class="footer-links"><li><a href="#skills">HTML / CSS</a></li><li><a href="#skills">JavaScript</a></li><li><a href="#skills">PHP / MySQL</a></li><li><a href="#skills">Gestion de projets</a></li></ul></div><div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li><i class="fas fa-envelope"></i> ricardovonoupro@gmail.com</li><li><i class="fas fa-phone"></i> +229 01 60 39 39 06</li><li><i class="fas fa-map-marker-alt"></i> Bénin</li></ul></div></div><div class="copyright">&copy; <span id="year"></span> Ricardo Dovonou. Tous droits réservés.</div></div></footer>
+    <script src="script.js"></script>
+</body>
+</html>
