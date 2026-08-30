@@ -929,7 +929,8 @@ footer {
         left: 0;
     }
 
-    .timeline-item::before {
+    .timeline-item:nth-child(odd)::before,
+    .timeline-item:nth-child(even)::before {
         left: 20px;
     }
 }
