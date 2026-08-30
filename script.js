@@ -217,6 +217,21 @@ const showStatus = (text, type) => {
     formStatus.className = 'form-status ' + type;
 };
 
+const setFormLoading = isLoading => {
+    if (!contactForm) return;
+    contactForm.classList.toggle('is-loading', isLoading);
+
+    contactForm.querySelectorAll('input, textarea, button').forEach(el => {
+        el.disabled = isLoading;
+    });
+
+    if (isLoading) {
+        submitBtn.innerHTML = '<span class="btn-spinner" aria-hidden="true"></span> Envoi en cours…';
+    } else {
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
+    }
+};
+
 if (contactForm) {
     contactForm.addEventListener('submit', async event => {
         event.preventDefault();
@@ -232,8 +247,7 @@ if (contactForm) {
             return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi en cours…';
+        setFormLoading(true);
         showStatus('', '');
 
         try {
@@ -252,8 +266,7 @@ if (contactForm) {
         } catch (error) {
             showStatus("Connexion impossible. Écris-moi directement à ricardovonoupro@gmail.com.", 'error');
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
+            setFormLoading(false);
         }
     });
 }

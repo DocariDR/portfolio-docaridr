@@ -1234,6 +1234,25 @@ body, header, footer, .skill-category, .project-card, .timeline-content,
 .form-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .form-actions .btn { flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 
+.contact-form.is-loading { position: relative; pointer-events: none; }
+.contact-form.is-loading .form-group,
+.contact-form.is-loading .form-actions { opacity: .55; transition: opacity .2s ease; }
+.contact-form.is-loading #submitBtn { opacity: 1; }
+
+.btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, .35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: btnSpin .7s linear infinite;
+}
+
+@keyframes btnSpin {
+    to { transform: rotate(360deg); }
+}
+
 .btn-whatsapp {
     background: #25D366;
     border-color: #25D366;
