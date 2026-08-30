@@ -1,3 +1,32 @@
+// Bascule de thème clair / sombre
+const themeToggle = document.querySelector('.theme-toggle');
+const applyThemeState = (theme) => {
+    if (!themeToggle) return;
+    const isDark = theme === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.setAttribute('aria-label', isDark ? 'Activer le thème clair' : 'Activer le thème sombre');
+};
+applyThemeState(document.documentElement.getAttribute('data-theme') || 'light');
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        applyThemeState(next);
+    });
+}
+
+// Suit le thème système si l'utilisateur n'a jamais choisi manuellement
+const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+systemThemeQuery.addEventListener('change', (event) => {
+    if (localStorage.getItem('theme')) return;
+    const next = event.matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    applyThemeState(next);
+});
+
 // Année courante
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();

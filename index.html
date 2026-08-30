@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio de Ricardo DOVONOU, développeur web en début de parcours au Bénin, avec des compétences en développement web et gestion de projets.">
@@ -30,7 +37,13 @@
                     <li><a href="#qualities">Qualités & intérêts</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+                <div class="navbar-actions">
+                    <button class="theme-toggle" type="button" aria-label="Activer le thème sombre" aria-pressed="false">
+                        <i class="fa-solid fa-moon theme-icon-dark" aria-hidden="true"></i>
+                        <i class="fa-solid fa-sun theme-icon-light" aria-hidden="true"></i>
+                    </button>
+                    <button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+                </div>
             </nav>
         </div>
     </header>
