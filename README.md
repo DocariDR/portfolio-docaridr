@@ -38,17 +38,6 @@ myportfolio-officiel/
     └── ...                    # Photos et illustrations du portfolio
 ```
 
-## Déploiement (gratuit)
-
-Ce site étant 100 % statique, il peut être hébergé gratuitement via **GitHub Pages** :
-
-1. Pousser ce dossier dans un dépôt GitHub public
-2. Aller dans **Settings → Pages**
-3. Choisir la branche `main` et le dossier `/ (root)` comme source
-4. Le site sera accessible à l'adresse `https://<ton-pseudo>.github.io/<nom-du-repo>/`
-
-Alternatives gratuites tout aussi simples : **Netlify** ou **Vercel** (glisser-déposer le dossier, ou connecter le dépôt GitHub pour un déploiement automatique à chaque mise à jour).
-
 ## À propos
 
 Ce portfolio présente notamment :
