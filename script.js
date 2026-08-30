@@ -197,16 +197,76 @@ if (greeting && !reduceMotion) {
     window.setTimeout(typeWriter, 700);
 }
 
-// Formulaire : validation puis ouverture du client email, sans faux succès
+// Formulaire : envoi réel via Web3Forms + option WhatsApp
 const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+const whatsappBtn = document.getElementById('whatsappSend');
+const WHATSAPP_NUMBER = '2290160393906';
+
+const getFormValues = () => ({
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    subject: document.getElementById('subject').value.trim(),
+    message: document.getElementById('message').value.trim(),
+});
+
+const showStatus = (text, type) => {
+    if (!formStatus) return;
+    formStatus.textContent = text;
+    formStatus.className = 'form-status ' + type;
+};
+
 if (contactForm) {
-    contactForm.addEventListener('submit', event => {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const subject = document.getElementById('subject').value.trim();
-        const message = document.getElementById('message').value.trim();
+    contactForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const { name, email, subject, message } = getFormValues();
         if (!name || !email || !subject || !message) {
-            event.preventDefault();
+            showStatus('Merci de remplir tous les champs.', 'error');
+            return;
         }
+
+        const accessKey = contactForm.querySelector('input[name="access_key"]').value;
+        if (!accessKey || accessKey === 'VOTRE_CLE_WEB3FORMS_ICI') {
+            showStatus('Envoi par e-mail non configuré pour le moment - utilise WhatsApp ou ricardovonoupro@gmail.com en direct.', 'error');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Envoi en cours…';
+        showStatus('', '');
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
+            });
+            const result = await response.json();
+            if (result.success) {
+                showStatus('Message envoyé, merci ! Je te réponds au plus vite.', 'success');
+                contactForm.reset();
+            } else {
+                showStatus("Une erreur est survenue. Écris-moi directement à ricardovonoupro@gmail.com.", 'error');
+            }
+        } catch (error) {
+            showStatus("Connexion impossible. Écris-moi directement à ricardovonoupro@gmail.com.", 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
+        }
+    });
+}
+
+if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', () => {
+        const { name, email, subject, message } = getFormValues();
+        if (!name || !email || !subject || !message) {
+            showStatus('Remplis le formulaire avant d\'envoyer sur WhatsApp.', 'error');
+            return;
+        }
+        const text = `Bonjour Ricardo,\n\nNom : ${name}\nEmail : ${email}\nSujet : ${subject}\n\n${message}`;
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank', 'noopener');
     });
 }

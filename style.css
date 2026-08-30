@@ -1226,6 +1226,24 @@ body, header, footer, .skill-category, .project-card, .timeline-content,
 .form-note span { color:var(--primary); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; }
 .form-note p { margin-top:4px; color:var(--gray); font-size:.88rem; }
 .form-control { background:var(--surface); color:var(--dark); }
+
+.form-status { min-height: 1.2em; font-size: .88rem; font-weight: 600; margin: -6px 0 4px; }
+.form-status.success { color: #059669; }
+.form-status.error { color: #dc2626; }
+
+.form-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.form-actions .btn { flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+
+.btn-whatsapp {
+    background: #25D366;
+    border-color: #25D366;
+    color: #fff;
+}
+.btn-whatsapp:hover {
+    background: #1ebe5b;
+    border-color: #1ebe5b;
+    color: #fff;
+}
 .form-control:focus { box-shadow:0 0 0 4px rgba(37,99,235,.08); }
 
 footer { background:var(--ink); }
