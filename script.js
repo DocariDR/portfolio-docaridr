@@ -283,3 +283,16 @@ if (whatsappBtn) {
         window.open(url, '_blank', 'noopener');
     });
 }
+
+/* ---------------------------------------------------
+   Protection des images (clic droit + glisser-déposer)
+   --------------------------------------------------- */
+const PROTECTED_IMAGE_SELECTOR = 'img, .profile-circle, .logo-pic, .project-img';
+
+document.querySelectorAll(PROTECTED_IMAGE_SELECTOR).forEach(el => {
+    if (el.tagName === 'IMG') {
+        el.setAttribute('draggable', 'false');
+    }
+    el.addEventListener('contextmenu', e => e.preventDefault());
+    el.addEventListener('dragstart', e => e.preventDefault());
+});

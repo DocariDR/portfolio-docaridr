@@ -1403,3 +1403,23 @@ footer { background:var(--ink); }
         background: linear-gradient(180deg, var(--hero-tint-strong), var(--hero-tint-mid)), url("images/image.png") center / cover no-repeat;
     }
 }
+
+/* ---------------------------------------------------
+   Protection des images (sélection, drag, appui long mobile)
+   --------------------------------------------------- */
+img,
+.profile-circle,
+.profile-circle::after,
+.logo-pic,
+.project-img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+}
