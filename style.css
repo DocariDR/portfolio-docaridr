@@ -1016,7 +1016,7 @@ footer {
     }
 }
 /* =========================================================
-   PORTFOLIO V2 — enrichissement visuel et responsive
+   PORTFOLIO V2 - enrichissement visuel et responsive
    Les interactions et animations existantes sont conservées.
    ========================================================= */
 :root {
@@ -1236,13 +1236,39 @@ footer { background:var(--ink); }
 .footer-column p { color:#cbd5e1; }
 .footer-social a { font-size:.75rem; font-weight:800; }
 
-/* Scroll reveal — même logique, rendu plus doux */
-.section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form { opacity:0; transform:translateY(30px); transition:opacity .6s ease, transform .6s ease; }
-.section-heading.visible, .about-description.visible, .info-item.visible, .about-principles.visible, .skill-category.visible, .learning-strip.visible, .projects-filter.visible, .project-card.visible, .timeline-item.visible, .quality-card.visible, .opportunity-card.visible, .contact-item.visible, .contact-form.visible { opacity:1; transform:translateY(0); }
-.project-card.visible { transition-delay:calc(var(--delay, 0) * 1ms); }
+/* Scroll reveal - cascade échelonnée, easing plus doux */
+.section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form {
+    opacity: 0;
+    transform: translateY(34px) scale(.98);
+    transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    transition-delay: calc(var(--delay, 0) * 1ms);
+    will-change: opacity, transform;
+}
+.section-heading.visible, .about-description.visible, .info-item.visible, .about-principles.visible, .skill-category.visible, .learning-strip.visible, .projects-filter.visible, .project-card.visible, .timeline-item.visible, .quality-card.visible, .opportunity-card.visible, .contact-item.visible, .contact-form.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* La timeline garde son axe central : les items glissent depuis leur côté */
+.timeline-item { transform: translateY(18px) translateX(-32px); }
+.timeline-item:nth-child(even) { transform: translateY(18px) translateX(32px); }
+.timeline-item.visible { transform: translateY(0) translateX(0); }
+
 @keyframes filterReveal { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
 .cursor.is-hovering { transform:translate(-50%,-50%) scale(2); }
 .cursor-follower.is-hovering { transform:translate(-50%,-50%) scale(1.5); }
+
+/* Barre de progression de lecture */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 1100;
+    transition: width .1s linear;
+}
 
 @media (max-width: 992px) {
     .hero-content { gap:30px; }
@@ -1309,8 +1335,9 @@ footer { background:var(--ink); }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-    .section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form { opacity:1; transform:none; }
+    .section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form, .timeline-item:nth-child(even) { opacity:1; transform:none; }
     .profile-circle { animation:none; }
+    #scroll-progress { display:none; }
 }
 
 

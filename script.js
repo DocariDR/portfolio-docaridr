@@ -27,6 +27,39 @@ systemThemeQuery.addEventListener('change', (event) => {
     applyThemeState(next);
 });
 
+// Scroll reveal - cascade échelonnée par groupe (grille de cartes, liste, etc.)
+const revealSelectors = '.section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form';
+const revealGroupCounts = new Map();
+document.querySelectorAll(revealSelectors).forEach(element => {
+    const parent = element.parentElement;
+    const count = revealGroupCounts.get(parent) || 0;
+    element.style.setProperty('--delay', String(Math.min(count * 70, 420)));
+    revealGroupCounts.set(parent, count + 1);
+});
+const revealElements = document.querySelectorAll(revealSelectors);
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+revealElements.forEach(element => revealObserver.observe(element));
+
+// Barre de progression de lecture
+const scrollProgress = document.getElementById('scroll-progress');
+if (scrollProgress) {
+    const updateScrollProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgress.style.width = `${Math.min(percent, 100)}%`;
+    };
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
+}
+
 // Année courante
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
@@ -111,18 +144,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-// Scroll reveal
-const revealElements = document.querySelectorAll('.section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form');
-const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-    });
-}, { threshold: 0.1 });
-revealElements.forEach(element => revealObserver.observe(element));
-
-// Parallax léger du Hero — conservé, mais désactivé si l'utilisateur réduit les animations
+// Parallax léger du Hero - conservé, mais désactivé si l'utilisateur réduit les animations
 const hero = document.querySelector('.hero');
 if (hero && !reduceMotion) {
     window.addEventListener('scroll', () => {
@@ -131,7 +153,7 @@ if (hero && !reduceMotion) {
     }, { passive: true });
 }
 
-// Curseur personnalisé — conservé sur les appareils qui le permettent
+// Curseur personnalisé - conservé sur les appareils qui le permettent
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
 const finePointer = window.matchMedia('(pointer: fine)').matches;
