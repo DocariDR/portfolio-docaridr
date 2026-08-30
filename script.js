@@ -1,209 +1,161 @@
-// Set current year
-document.getElementById('year').textContent = new Date().getFullYear();
+// Année courante
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
-// Mobile menu toggle
+// Menu mobile
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.innerHTML = navLinks.classList.contains('active') ? 
-        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-    });
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
-            this.classList.add('active');
-        }
-    });
-});
-
-// Header scroll effect
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('active');
+        hamburger.classList.toggle('is-open', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Ouvrir le menu');
+        });
+    });
+}
+
+// Défilement fluide
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (event) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
 });
 
-// Project filter functionality
+// Effet du header au scroll
+const updateHeader = () => {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 80);
+};
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+// Navigation active selon la section visible
+const sections = document.querySelectorAll('main section[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navItems.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+    });
+}, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+sections.forEach(section => sectionObserver.observe(section));
+
+// Filtres des projets
 const filterBtns = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
-
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
+        filterBtns.forEach(item => item.classList.remove('active'));
         btn.classList.add('active');
-        
-        const filter = btn.getAttribute('data-filter');
-        
-        projectCards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            
-            setTimeout(() => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                } else {
-                    card.style.display = 'none';
-                }
-            }, 300);
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach((card, index) => {
+            const matches = filter === 'all' || card.dataset.category === filter;
+            if (!matches) {
+                card.classList.add('is-hidden');
+                return;
+            }
+            card.classList.remove('is-hidden');
+            if (!reduceMotion) {
+                card.style.animation = 'none';
+                void card.offsetWidth;
+                card.style.animation = `filterReveal .45s ease ${index * 0.04}s both`;
+            }
         });
     });
 });
 
-// Animate project cards when they come into view
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
+// Scroll reveal
+const revealElements = document.querySelectorAll('.section-heading, .about-description, .info-item, .about-principles, .skill-category, .learning-strip, .projects-filter, .project-card, .timeline-item, .quality-card, .opportunity-card, .contact-item, .contact-form');
+const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-projectCards.forEach(card => {
-    observer.observe(card);
-});
-
-// Form submission
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    // Simple validation
-    if (name && email && subject && message) {
-        alert(`Merci ${name} ! Votre message a été envoyé avec succès. Je vous répondrai dans les plus brefs délais.`);
-        contactForm.reset();
-    }
-});
-
-// Custom cursor effect
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
-
-document.addEventListener('mousemove', (e) => {
-    cursor.style.opacity = '1';
-    cursorFollower.style.opacity = '1';
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    cursorFollower.style.left = e.clientX + 'px';
-    cursorFollower.style.top = e.clientY + 'px';
-});
-
-document.addEventListener('mouseout', () => {
-    cursor.style.opacity = '0';
-    cursorFollower.style.opacity = '0';
-});
-
-// Enlarge cursor on interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .project-card, .filter-btn');
-
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
-    });
-    
-    element.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
-});
-
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const hero = document.querySelector('.hero');
-    const scrolled = window.pageYOffset;
-    hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
-});
-
-// Initialize animations on load
-window.addEventListener('load', () => {
-    // Trigger initial animations
-    setTimeout(() => {
-        const heroTitle = document.querySelector('.hero-title');
-        heroTitle.style.opacity = '1';
-        heroTitle.style.transform = 'translateY(0)';
-    }, 500);
-});
-
-// Typing effect for greeting
-const greeting = document.querySelector('.greeting');
-const text = greeting.textContent;
-greeting.textContent = '';
-
-let i = 0;
-const typeWriter = () => {
-    if (i < text.length) {
-        greeting.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
-    }
-};
-
-setTimeout(typeWriter, 1000);
-
-// Scroll reveal animations
-const revealElements = document.querySelectorAll('.section-title, .about-description, .info-item, .skill-category, .projects-filter, .timeline-item, .contact-item');
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            entry.target.style.transition = 'all 0.6s ease';
-            revealObserver.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
     });
 }, { threshold: 0.1 });
+revealElements.forEach(element => revealObserver.observe(element));
 
-revealElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    revealObserver.observe(element);
-});
+// Parallax léger du Hero — conservé, mais désactivé si l'utilisateur réduit les animations
+const hero = document.querySelector('.hero');
+if (hero && !reduceMotion) {
+    window.addEventListener('scroll', () => {
+        const offset = Math.min(window.scrollY * 0.12, 80);
+        hero.style.setProperty('--hero-shift', `${offset}px`);
+    }, { passive: true });
+}
+
+// Curseur personnalisé — conservé sur les appareils qui le permettent
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+if (cursor && cursorFollower && finePointer && !reduceMotion) {
+    document.addEventListener('mousemove', event => {
+        cursor.style.opacity = '1';
+        cursorFollower.style.opacity = '1';
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        cursorFollower.style.left = `${event.clientX}px`;
+        cursorFollower.style.top = `${event.clientY}px`;
+    });
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorFollower.style.opacity = '0';
+    });
+    document.querySelectorAll('a, button, .project-card, .filter-btn').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.classList.add('is-hovering');
+            cursorFollower.classList.add('is-hovering');
+        });
+        element.addEventListener('mouseleave', () => {
+            cursor.classList.remove('is-hovering');
+            cursorFollower.classList.remove('is-hovering');
+        });
+    });
+}
+
+// Animation d'introduction du greeting, conservée
+const greeting = document.querySelector('.greeting');
+if (greeting && !reduceMotion) {
+    const originalText = greeting.textContent;
+    greeting.textContent = '';
+    let index = 0;
+    const typeWriter = () => {
+        if (index < originalText.length) {
+            greeting.textContent += originalText.charAt(index++);
+            window.setTimeout(typeWriter, 45);
+        }
+    };
+    window.setTimeout(typeWriter, 700);
+}
+
+// Formulaire : validation puis ouverture du client email, sans faux succès
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', event => {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if (!name || !email || !subject || !message) {
+            event.preventDefault();
+        }
+    });
+}
