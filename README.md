@@ -1,6 +1,6 @@
 # Portfolio - Ricardo DOVONOU
 
-Portfolio personnel de **Ricardo DOVONOU**, développeur web en début de parcours au Bénin, présentant mon profil, mes compétences et mes projets réalisés en formation et en autoformation.
+Portfolio personnel de **Ricardo DOVONOU**, développeur web en début de parcours, présentant mon profil, mes compétences et mes projets réalisés en formation et en autoformation.
 
 🔗 **Démo en ligne :**
 
