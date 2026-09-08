@@ -31,6 +31,7 @@ myportfolio-officiel/
 ├── index.html              # Page principale
 ├── style.css                # Styles (thèmes clair/sombre inclus)
 ├── script.js                 # Interactions (thème, filtres, scroll)
+├── CV_Ricardo_DOVONOU.pdf    # CV téléchargeable                
 ├── assets/
 │   └── fontawesome/          # Icônes (CSS + polices), hébergées en local
 └── images/
