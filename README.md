@@ -30,15 +30,16 @@ Aucun framework, build tool ou dépendance externe : le site fonctionne directem
 
 ```
 myportfolio-officiel/
-├── index.html              # Page principale
-├── style.css                # Styles (thèmes clair/sombre inclus)
-├── script.js                 # Interactions (thème, filtres, scroll)
-├── CV_Ricardo_DOVONOU.pdf    # CV téléchargeable                
+├── index.html                 # Page principale
+├── CV_Ricardo_DOVONOU.pdf     # CV téléchargeable                
 ├── assets/
-│   └── fontawesome/          # Icônes (CSS + polices), hébergées en local
-└── images/
-    ├── projet/                # Aperçus des projets présentés
-    └── ...                    # Photos et illustrations du portfolio
+│   ├── fontawesome/           # Icônes (CSS + polices), hébergées en local
+│   ├── style.css              # Styles (thèmes clair/sombre inclus)
+│   └── script.js              # Interactions (thème, filtres, scroll)
+│── images/
+│    ├── projet/                # Aperçus des projets présentés
+│    └── portfolio-ricardo.png  # Photos et illustrations du portfolio
+└── README.md                  # Documentation du projet
 ```
 
 ## À propos
