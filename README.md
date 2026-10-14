@@ -29,7 +29,7 @@ Aucun framework, build tool ou dépendance externe : le site fonctionne directem
 ## Structure du projet
 
 ```
-myportfolio-officiel/
+portfolio-docaridr/
 ├── index.html                 # Page principale
 ├── CV_Ricardo_DOVONOU.pdf     # CV téléchargeable                
 ├── assets/
