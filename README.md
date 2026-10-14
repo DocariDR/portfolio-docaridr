@@ -2,9 +2,11 @@
 
 Portfolio personnel de **Ricardo DOVONOU**, développeur web en début de parcours, présentant mon profil, mes compétences et mes projets réalisés en formation et en autoformation.
 
+![Aperçu du portfolio](images/portfolio-ricardo.png)
+
 🔗 **Démo en ligne :**
 
-![Aperçu du portfolio](images/portfolio-ricardo.png)
+[Cliquez ici pour accéder au portfolio](https://docaridr.github.io/portfolio-docaridr/)
 
 ## Fonctionnalités
 
