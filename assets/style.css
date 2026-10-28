@@ -288,7 +288,7 @@ header.scrolled {
     width: 85%;
     height: 85%;
     border-radius: 50%;
-    background: url('images/pic-ricardo.png') center/cover no-repeat;
+    background: url('../images/pic-ricardo.png') center/cover no-repeat;
     z-index: 2;
 }
 
@@ -1092,7 +1092,7 @@ body, header, footer, .skill-category, .project-card, .timeline-content,
     min-width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: url("images/logo.png") center / cover no-repeat;
+    background: url("../images/logo.png") center / cover no-repeat;
 }
 
 .hamburger {
