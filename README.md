@@ -38,7 +38,11 @@ portfolio-docaridr/
 │   └── script.js              # Interactions (thème, filtres, scroll)
 │── images/
 │    ├── projet/                # Aperçus des projets présentés
-│    └── portfolio-ricardo.png  # Photos et illustrations du portfolio
+│    ├── logo.png               # Logo du portfolio
+│    ├── pic-ricardo.png        # Photo de Ricardo DOVONOU
+│    ├── portfolio-ricardo.png  # Photos et illustrations du portfolio
+│    ├── RD.ico                 # Icône du portfolio
+│    └── ricardo-desktop.png   # Photo de Ricardo DOVONOU (version desktop)
 └── README.md                  # Documentation du projet
 ```
 
